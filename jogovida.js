@@ -396,34 +396,13 @@
 			return nova_matriz
 		}
 
-		function teste(i)
-		{
-			return new Promise((resolve) =>
-			{
-				resolve(i*i);
-			});
-		}
-
-
-		function teste1(nome = 'Michel', sobrenome)
-		{
-			return new Promise((resolve) =>
-			{
-				resolve(nome+' '+sobrenome);
-			});
-		}
-
-
-		function teste1_1(sobrenome) {
-			return teste1(sobrenome=sobrenome)
-
-		}
 
 		function timer(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
 
-		async function orquestrador(contexto, matriz_inicial, dim, rodadas)
+
+		function orquestrador(contexto, matriz_inicial, dim, rodadas=1)
 		{
 			while(rodadas)
 			{
@@ -433,7 +412,6 @@
 				await timer(2000);
 				geracao_grid(contexto,proxima_matriz,dim);
 				rodadas--;
-				console.log(rodadas);
 			}
 		}
 
@@ -444,20 +422,9 @@
 			let dim = 10;
 			gera_grid(contexto, dim, dim);
 			random = array_aleatorio(20,dim,dim);
-			//matriz_inicial = primeira_geracao(dim*dim,random);
-			matriz_inicial = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-							  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			  				  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			  				  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			  				  0, 0, 0, 0, 1, 1, 1, 0, 0, 0,
-			  				  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			  				  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			  				  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			  				  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-			  				  0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+			matriz_inicial = primeira_geracao(dim*dim,random);
 			geracao_grid(contexto,matriz_inicial,dim);
-			let rodadas = 1;
-			orquestrador(contexto,matriz_inicial,dim,rodadas);
+			orquestrador(contexto,matriz_inicial,dim);
 
 
 }
