@@ -1,4 +1,4 @@
-		async function gera_grid(contexto, dim_x, dim_y) 
+		function gera_grid(contexto, dim_x, dim_y) 
 		{
 			contexto.fillStyle = "black";
 			contexto.fillRect(0,0, dim_y*10, dim_x*10);
@@ -21,7 +21,6 @@
 			return
 		}
 
-
 		function array_aleatorio(tam_arry, dim_x, dim_y)
 		{
 			const numeros_aleatorios = new Array(tam_arry).fill(0).map((numero) => 
@@ -30,7 +29,6 @@
 			})
 			return numeros_aleatorios
 		}
-
 
 		function primeira_geracao(tam_arry, array_aleatorio)
 		{
@@ -53,6 +51,7 @@
 			return [indice, linha]
 		}
 
+
 		function modifica_celula(contexto, y_esquerdo_superior, x_esquerdo_superior)
 		{
 			contexto.fillStyle = "red";
@@ -61,7 +60,7 @@
 		}
 
 
-		async function geracao_grid(contexto, matriz_inicial, dimensao)
+		function geracao_grid(contexto, matriz_inicial, dimensao)
 		{
 			for(let i=0; i<matriz_inicial.length; i++)
 			{
@@ -72,6 +71,8 @@
 				}
 			}
 		}
+
+
 		function viva_ou_morta(qtd_vizinhos, estado_celula)
 		{
 			if(estado_celula)
@@ -103,6 +104,7 @@
 				}
 			}
 		}
+
 
 		function vizinhos_irrestritos(matriz_anterior, posicao, tam_linha)
 		{
@@ -141,6 +143,8 @@
 			}
 			return qtd_vizinhos;
 		}
+
+
 		function vizinhos_topo_esquerdo(matriz_anterior, posicao, tam_linha)
 		{
 			let qtd_vizinhos=0;
@@ -323,7 +327,6 @@
 		{
 			let vizinhos = 0;
 			let matriz_length = matriz_anterior.length;
-			//let matriz_length = 11;
 			for(let i=0; i<matriz_length; i++)
 			{	
 				let qtd_vizinhos = 0;
@@ -331,7 +334,6 @@
 				let pos_y_valida = Math.floor(i%tam_coluna);
 				if(i===0)
 				{
-					//console.log('Chegou 1');
 					qtd_vizinhos=vizinhos_topo_esquerdo(matriz_anterior,i, tam_linha);
 					matriz_anterior[i] = viva_ou_morta(qtd_vizinhos, matriz_anterior[i]);
 				}
@@ -352,12 +354,8 @@
 				}
 				else if(pos_x_valida === 0)
 				{
-					//console.log('pos ' +i);
-					//console.log('posicaoa anterior '+matriz_anterior[i]);
 					qtd_vizinhos=vizinhos_baixo(matriz_anterior, i, tam_linha);
 					matriz_anterior[i] = viva_ou_morta(qtd_vizinhos, matriz_anterior[i]);
-					//console.log('posicaoa pos '+matriz_anterior[i]);
-					//console.log('qtd '+qtd_vizinhos);
 				}
 				else if(pos_x_valida ===tam_linha-1)
 				{
@@ -371,7 +369,6 @@
 				}
 				else if(pos_y_valida ===tam_coluna-1)
 				{
-					//console.log('Chegou 3');
 					qtd_vizinhos=vizinhos_esquerda(matriz_anterior,i, tam_linha);
 					matriz_anterior[i] = viva_ou_morta(qtd_vizinhos, matriz_anterior[i]);
 				}
